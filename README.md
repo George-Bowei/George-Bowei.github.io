@@ -1,11 +1,15 @@
-# George (Bowei) Zheng — Personal Website
+# George (Bowei) Zheng — Academic Website
 
-Academic portfolio published with GitHub Pages: <https://george-bowei.github.io/>.
+Personal academic website published at <https://george-bowei.github.io/> with GitHub Pages.
 
-The website is a static HTML/CSS project. Main content is in `index.html`; styles are in `assets/site.css`.
+This site uses the [al-folio](https://github.com/alshedivat/al-folio) academic starter. Its upstream MIT license is retained in `LICENSE-AL-FOLIO`.
 
-## Update the site
+## Update content
 
-Edit the relevant section in `index.html` or `assets/site.css`, then push the change to `main`. The workflow in `.github/workflows/pages.yml` deploys each update automatically.
+- About page: `_pages/about.md`
+- CV: `_data/cv.yml`
+- Publication list: `_bibliography/papers.bib`
+- Research project pages: `_projects/`
+- Photos: `assets/img/`
 
-Keep this repository public for the website to remain publicly accessible, and limit write access to your account if you want to be the only person who can update its source.
+Push changes to `main`; the workflow in `.github/workflows/pages.yml` builds and deploys the site automatically.

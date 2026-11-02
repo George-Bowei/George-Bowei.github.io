@@ -1,0 +1,140 @@
+cv:
+  name: George (Bowei) Zheng
+  label: MSc Animal Sciences Student
+  email: george-bowei.zheng@outlook.com
+  location: Wageningen, The Netherlands
+  image: /assets/img/profile.png
+  summary: >-
+    MSc student in Animal Sciences at Wageningen University & Research, with a background in aquaculture and veterinary practice. Interested in animal genetics and breeding, quantitative phenotyping, and computer vision.
+  social_networks:
+    - network: GitHub
+      username: George-Bowei
+
+  sections:
+    Education:
+      - institution: Wageningen University & Research
+        location: Wageningen, The Netherlands
+        area: Animal Sciences
+        studyType: MSc
+        start_date: 2025-09
+        end_date: 2027-06
+
+      - institution: China Agricultural University, Yantai Institute
+        location: Yantai, China
+        area: Aquaculture
+        studyType: BSc
+        start_date: 2021-09
+        end_date: 2025-06
+
+      - institution: College of Humanities and Development Studies, China Agricultural University
+        location: Beijing, China
+        area: Comparative Law
+        studyType: Minor degree in Law
+        start_date: 2023-09
+        end_date: 2025-06
+
+      - institution: Luiz de Queiroz College of Agriculture, University of São Paulo
+        location: Piracicaba, Brazil
+        area: Sustainable Tropical Agriculture
+        studyType: Funded summer school
+        start_date: 2023-07
+        end_date: 2023-08
+        highlights:
+          - Funded by China Agricultural University.
+
+    Experience:
+      - company: China Agricultural University, Yantai Institute
+        position: International Office Intern
+        location: Yantai, Shandong, China
+        start_date: 2024-09
+        end_date: 2025-03
+        highlights:
+          - Supported document preparation, filing, and record management.
+          - Assisted with international exchange activities and administrative coordination.
+          - Helped organise information and communicate with students and university staff.
+
+      - company: China Agricultural University, Yantai Institute
+        position: Project Leader — Lentinus edodes Hydrolysate Optimisation
+        location: Yantai, China
+        start_date: 2023
+        end_date: 2024
+        highlights:
+          - Applied response surface methodology to optimise the hydrolysate preparation process.
+          - Evaluated hydrolysis products by quantitatively determining free amino acids.
+
+      - company: China Agricultural University, Yantai Institute
+        position: Research Assistant — Urechis unicinctus Study
+        location: Yantai, China
+        start_date: 2022
+        end_date: 2023
+        highlights:
+          - Contributed to a study of temperature effects on growth, behaviour, and water quality.
+          - Used image-recognition methods for behavioural analysis.
+
+      - company: Chinese Academy of Sciences, Institute of Botany
+        position: Field Expedition Member
+        location: Heilongjiang, China
+        start_date: 2022-07
+        end_date: 2022-08
+        highlights:
+          - Collected plant specimens and soil across 80 sites in eight cities in northeastern China.
+          - Collected and preserved more than 1,000 botanical specimens using standard protocols.
+          - Surveyed grass and pasture resources and contributed to a regional database.
+          - Used GPS and GIS tools for habitat mapping and field data collection.
+
+      - company: State Key Laboratory of Systematic and Evolutionary Botany, Chinese Academy of Sciences
+        position: Laboratory Assistant Intern
+        location: Beijing, China
+        start_date: 2022-04
+        end_date: 2022-05
+        highlights:
+          - Identified and classified herbarium specimens from more than 20 plant families from southern China and Southeast Asia.
+
+    Research Grants:
+      - title: China Agricultural University Undergraduate Research Program
+        date: 2023
+        awarder: China Agricultural University
+        summary: Principal Investigator. Project number U2023030.
+
+      - title: Shandong Modern Agricultural Industry Technology System, Edible Fungi Innovation Team
+        awarder: Shandong Modern Agricultural Industry Technology System
+        summary: Participant Researcher. Project number SDAIT-07-14.
+
+    Publications:
+      - title: Response surface methodology optimization of enzymatic hydrolysis of Lentinus edodes and analysis of product ingredients functions
+        authors:
+          - Bowei Zheng
+          - X. Wu
+          - T. Qiao
+          - Q. Ding
+          - H. Wang
+        publisher: Frontiers in Sustainable Food Systems
+        releaseDate: 2025
+        url: https://doi.org/10.3389/fsufs.2025.1617816
+        summary: Volume 9, article 1617816.
+
+    Leadership:
+      - company: Students International Communication Association, Yantai Institute
+        position: President
+        start_date: 2023-07
+        end_date: 2024-09
+
+    Awards:
+      - title: Third-class Scholarship
+        date: 2022-12
+        awarder: China Agricultural University
+
+    Certificates:
+      - name: Veterinary Practitioner Qualification Certificate (PRC)
+        date: 2025-11
+        issuer: Tianjin Municipal Bureau of Agriculture and Rural Affairs
+
+    Skills:
+      - name: Statistical analysis
+        keywords: R, SPSS
+      - name: Research software
+        keywords: Visual Basic, Origin, Mathematica
+
+    Interests:
+      - name: Animal science research
+        keywords: Animal genetics and breeding, quantitative phenotyping, computer vision, aquaculture

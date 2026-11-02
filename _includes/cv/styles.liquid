@@ -1,0 +1,156 @@
+<style>
+  /* al_folio_cv 1.0.2 predates the list-group reset added in 1.0.3. */
+  .cv ul.list-group {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cv ul.list-group > li.list-group-item {
+    display: block;
+    margin: 0;
+    padding: 0.5rem 0.75rem;
+    list-style: none;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+
+  .cv ul.list-group > li.list-group-item::marker {
+    content: "";
+  }
+
+  .cv ul.list-group-flush > li.list-group-item:last-child {
+    border-bottom: 0;
+  }
+
+  .cv .cv-entry-list {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+  }
+
+  .cv .cv-entry {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: 10rem minmax(0, 1fr);
+    column-gap: 1.25rem;
+    align-items: start;
+    padding: 0.85rem 0.75rem;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+
+  .cv .cv-entry:first-child {
+    padding-top: 0.25rem;
+  }
+
+  .cv .cv-entry:last-child {
+    padding-bottom: 0.25rem;
+    border-bottom: 0;
+  }
+
+  .cv .cv-entry-meta,
+  .cv .cv-entry-main {
+    min-width: 0;
+  }
+
+  .cv .cv-entry-date {
+    margin: 0 0 0.55rem;
+    line-height: 1.2;
+  }
+
+  .cv .cv-entry-date .badge {
+    display: inline-flex;
+    box-sizing: border-box;
+    min-width: 8.5rem;
+    min-height: 1.55rem;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  .cv .cv-entry-location {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: 0.9rem minmax(0, 1fr);
+    column-gap: 0.35rem;
+    align-items: start;
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.35;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .cv .cv-entry-location i {
+    margin-top: 0.08rem;
+    color: var(--global-theme-color);
+    font-size: 0.78rem;
+    text-align: center;
+  }
+
+  .cv .cv-entry-location span,
+  .cv .cv-entry-title,
+  .cv .cv-entry-organization,
+  .cv .cv-entry-subtitle,
+  .cv .cv-entry-authors,
+  .cv .cv-entry-summary {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .cv .cv-entry-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .cv .cv-entry-organization,
+  .cv .cv-entry-subtitle {
+    margin: 0.15rem 0 0;
+    font-size: 0.95rem;
+  }
+
+  .cv .cv-entry-subtitle,
+  .cv .cv-entry-summary--italic {
+    font-style: italic;
+  }
+
+  .cv .cv-entry-authors,
+  .cv .cv-entry-summary {
+    margin: 0.45rem 0 0;
+  }
+
+  .cv .cv-entry-highlights {
+    margin: 0.45rem 0 0;
+    padding-inline-start: 1.2rem;
+    list-style: disc;
+  }
+
+  .cv .cv-entry-highlights li {
+    display: list-item;
+    margin: 0.15rem 0;
+  }
+
+  @media (max-width: 767px) {
+    .cv .cv-entry {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 0.55rem;
+    }
+
+    .cv .cv-entry-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1rem;
+      align-items: flex-start;
+    }
+
+    .cv .cv-entry-date {
+      margin: 0;
+    }
+
+    .cv .cv-entry-location {
+      flex: 1 1 10rem;
+      max-width: 100%;
+    }
+  }
+</style>

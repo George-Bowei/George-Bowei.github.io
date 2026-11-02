@@ -1,0 +1,9 @@
+<div class="cv-entry-list">
+  {% for entry in entries %}
+    {% capture entry_has_content %}{% include cv/has_content.liquid entry=entry %}{% endcapture %}
+    {% assign entry_has_content = entry_has_content | strip %}
+    {% if entry_has_content == 'true' %}
+      {% include cv/entry.liquid entry=entry title=entry.title organization=entry.publisher authors=entry.authors summary=entry.summary %}
+    {% endif %}
+  {% endfor %}
+</div>

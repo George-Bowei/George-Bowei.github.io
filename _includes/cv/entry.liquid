@@ -1,0 +1,135 @@
+{%- assign entry = include.entry -%}
+{%- assign date_label = '' -%}
+{%- capture start_date -%}
+  {%- if entry.start_date -%}{{ entry.start_date }}{%- elsif entry.startDate -%}{{ entry.startDate }}{%- endif -%}
+{%- endcapture -%}
+{%- assign start_date = start_date | strip -%}
+{%- capture end_date -%}
+  {%- if entry.end_date -%}{{ entry.end_date }}{%- elsif entry.endDate -%}{{ entry.endDate }}{%- endif -%}
+{%- endcapture -%}
+{%- assign end_date = end_date | strip -%}
+{%- capture point_date -%}
+  {%- if entry.date -%}{{ entry.date }}{%- elsif entry.releaseDate -%}{{ entry.releaseDate }}{%- endif -%}
+{%- endcapture -%}
+{%- assign point_date = point_date | strip -%}
+
+{%- if start_date != '' -%}
+  {%- assign date_start_year = start_date | split: '-' | first -%}
+  {%- if end_date != '' -%}
+    {%- assign date_end_year = end_date | split: '-' | first -%}
+  {%- else -%}
+    {%- assign date_end_year = 'Present' -%}
+  {%- endif -%}
+  {%- capture date_label -%}{{ date_start_year }} - {{ date_end_year }}{%- endcapture -%}
+{%- elsif point_date != '' -%}
+  {%- assign date_label = point_date | split: '-' | first -%}
+{%- endif -%}
+
+{%- capture entry_title -%}
+  {%- if include.title -%}
+    {{ include.title }}
+  {%- elsif entry.position -%}
+    {{ entry.position }}
+  {%- elsif entry.studyType -%}
+    {{ entry.studyType }}
+  {%- elsif entry.degree -%}
+    {{ entry.degree }}
+  {%- elsif entry.title -%}
+    {{ entry.title }}
+  {%- elsif entry.name -%}
+    {{ entry.name }}
+  {%- elsif entry.label -%}
+    {{ entry.label }}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign entry_title = entry_title | strip -%}
+
+{%- capture organization -%}
+  {%- if include.organization -%}
+    {{ include.organization }}
+  {%- elsif entry.institution -%}
+    {{ entry.institution }}
+  {%- elsif entry.company -%}
+    {{ entry.company }}
+  {%- elsif entry.organization -%}
+    {{ entry.organization }}
+  {%- elsif entry.publisher -%}
+    {{ entry.publisher }}
+  {%- elsif entry.awarder -%}
+    {{ entry.awarder }}
+  {%- elsif entry.issuer -%}
+    {{ entry.issuer }}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign organization = organization | strip -%}
+
+{%- capture subtitle -%}
+  {%- if include.subtitle -%}{{ include.subtitle }}{%- elsif entry.area -%}{{ entry.area }}{%- endif -%}
+{%- endcapture -%}
+{%- assign subtitle = subtitle | strip -%}
+{%- capture location -%}
+  {%- if include.location -%}{{ include.location }}{%- elsif entry.location -%}{{ entry.location }}{%- endif -%}
+{%- endcapture -%}
+{%- assign location = location | strip -%}
+{%- capture summary -%}
+  {%- if include.summary -%}
+    {{ include.summary }}
+  {%- elsif entry.summary -%}
+    {{ entry.summary }}
+  {%- elsif entry.details -%}
+    {{ entry.details }}
+  {%- elsif entry.reference -%}
+    {{ entry.reference }}
+  {%- elsif entry.bullet -%}
+    {{ entry.bullet }}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign summary = summary | strip -%}
+{%- assign authors = include.authors | default: entry.authors -%}
+{%- assign highlights = include.highlights | default: entry.highlights -%}
+{%- assign courses = include.courses | default: entry.courses -%}
+{%- assign highlights_count = highlights | size -%}
+{%- assign courses_count = courses | size -%}
+{%- assign entry_url = include.url | default: entry.url -%}
+
+<article class="cv-entry">
+  <div class="cv-entry-meta">
+    {% if date_label %}
+      <div class="cv-entry-date">
+        <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle">{{ date_label }}</span>
+      </div>
+    {% endif %}
+    {% if location != '' %}
+      <div class="cv-entry-location">
+        <i class="fa-solid fa-location-dot iconlocation" aria-hidden="true"></i>
+        <span>{{ location }}</span>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="cv-entry-main">
+    {% if entry_title != '' %}
+      <h4 class="cv-entry-title">
+        {% if entry_url %}<a href="{{ entry_url }}">{{ entry_title }}</a>{% else %}{{ entry_title }}{% endif %}
+      </h4>
+    {% endif %}
+    {% if organization != '' %}<div class="cv-entry-organization">{{ organization }}</div>{% endif %}
+    {% if subtitle != '' %}<div class="cv-entry-subtitle">{{ subtitle }}</div>{% endif %}
+    {% if authors %}
+      <div class="cv-entry-authors">
+        <strong>Authors:</strong> {{ authors | join: ', ' }}
+      </div>
+    {% endif %}
+    {% if summary != '' %}
+      <div class="cv-entry-summary{% if include.summary_italic %} cv-entry-summary--italic{% endif %}">
+        {{ summary | markdownify | remove: '<p>' | remove: '</p>' }}
+      </div>
+    {% endif %}
+    {% if highlights_count > 0 or courses_count > 0 %}
+      <ul class="cv-entry-highlights">
+        {% for item in courses %}<li>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</li>{% endfor %}
+        {% for item in highlights %}<li>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</article>

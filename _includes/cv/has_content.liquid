@@ -1,0 +1,30 @@
+{%- comment -%}
+  Return `true` only when an entry contains at least one non-empty value.
+  The caller captures this output before rendering a section or row.
+{%- endcomment -%}
+{%- if include.entry != nil -%}
+  {%- for field in include.entry -%}
+    {%- assign value = field[1] -%}
+    {%- if value != nil and value != false -%}
+      {%- capture value_text -%}{{ value }}{%- endcapture -%}
+      {%- assign value_text = value_text | strip -%}
+      {%- if value_text != '' -%}true{%- break -%}{%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- for entry in include.entries -%}
+    {%- assign entry_has_content = false -%}
+    {%- for field in entry -%}
+      {%- assign value = field[1] -%}
+      {%- if value != nil and value != false -%}
+        {%- capture value_text -%}{{ value }}{%- endcapture -%}
+        {%- assign value_text = value_text | strip -%}
+        {%- if value_text != '' -%}
+          {%- assign entry_has_content = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if entry_has_content -%}true{%- break -%}{%- endif -%}
+  {%- endfor -%}
+{%- endif -%}

@@ -1,0 +1,116 @@
+{% include cv/styles.liquid %}
+
+<div class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      {{ page.title }}
+      {% if page.cv_pdf %}
+        <a
+          {% if page.cv_pdf contains '://' %}
+            href="{{ page.cv_pdf }}"
+          {% else %}
+            href="{{ page.cv_pdf | relative_url }}"
+          {% endif %}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="float-right"
+        ><i class="fa-solid fa-file-pdf"></i></a>
+      {% endif %}
+    </h1>
+    {% if page.description %}<p class="post-description">{{ page.description }}</p>{% endif %}
+  </header>
+
+  {% assign cv = site.data.cv.cv %}
+  {% if page.cv_format == 'jsonresume' and site.data.resume %}
+    <article><div class="cv"><p>Set <code>cv_format: rendercv</code> to use this site's RenderCV data.</p></div></article>
+  {% elsif cv %}
+    <article>
+      <div class="cv">
+        {% if cv.name or cv.label or cv.location or cv.email or cv.phone or cv.website %}
+          <div class="card mt-3 p-3">
+            <h3 class="card-title font-weight-medium">Contact Information</h3>
+            <table class="table table-cv table-sm table-borderless">
+              {% if cv.name %}<tr><td class="p-1 pr-2 font-weight-bold"><b>Name</b></td><td class="p-1 pl-2 font-weight-light">{{ cv.name }}</td></tr>{% endif %}
+              {% if cv.label %}<tr><td class="p-1 pr-2 font-weight-bold"><b>Professional Title</b></td><td class="p-1 pl-2 font-weight-light">{{ cv.label }}</td></tr>{% endif %}
+              {% if cv.email %}<tr><td class="p-1 pr-2 font-weight-bold"><b>Email</b></td><td class="p-1 pl-2 font-weight-light">{{ cv.email }}</td></tr>{% endif %}
+              {% if cv.location %}<tr><td class="p-1 pr-2 font-weight-bold"><b>Location</b></td><td class="p-1 pl-2 font-weight-light">{{ cv.location }}</td></tr>{% endif %}
+              {% if cv.phone %}<tr><td class="p-1 pr-2 font-weight-bold"><b>Phone</b></td><td class="p-1 pl-2 font-weight-light">{{ cv.phone }}</td></tr>{% endif %}
+              {% if cv.website %}<tr><td class="p-1 pr-2 font-weight-bold"><b>Website</b></td><td class="p-1 pl-2 font-weight-light"><a href="{{ cv.website }}">{{ cv.website }}</a></td></tr>{% endif %}
+              {% for social in cv.social_networks %}
+                {% assign network = social.network | downcase %}
+                {% assign profile_url = social.url %}
+                {% if profile_url == nil and network == 'github' %}{% assign profile_url = 'https://github.com/' | append: social.username %}{% endif %}
+                {% if profile_url == nil and network == 'linkedin' %}{% assign profile_url = 'https://www.linkedin.com/in/' | append: social.username %}{% endif %}
+                <tr><td class="p-1 pr-2 font-weight-bold"><b>{{ social.network }}</b></td><td class="p-1 pl-2 font-weight-light">{% if profile_url %}<a href="{{ profile_url }}">{{ social.username }}</a>{% else %}{{ social.username }}{% endif %}</td></tr>
+              {% endfor %}
+            </table>
+          </div>
+        {% endif %}
+
+        {% if cv.summary %}
+          <div class="card mt-3 p-3">
+            <h3 class="card-title font-weight-medium">Professional Summary</h3>
+            <p>{{ cv.summary | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+          </div>
+        {% endif %}
+
+        {% assign empty_array = '' | split: ',' %}
+        {% assign experience = cv.sections.Experience | default: empty_array %}
+        {% assign volunteer = cv.sections.Volunteer | default: empty_array %}
+        {% assign combined_experience = experience | concat: volunteer | al_cv_sort_by_date %}
+        {% capture section_has_content %}{% include cv/has_content.liquid entries=combined_experience %}{% endcapture %}
+        {% assign section_has_content = section_has_content | strip %}
+        {% if section_has_content == 'true' %}
+          <a class="anchor" id="experience"></a>
+          <div class="card mt-3 p-3">
+            <h3 class="card-title font-weight-medium">Experience</h3>
+            {% assign entries = combined_experience %}
+            {% include cv/experience.liquid %}
+          </div>
+        {% endif %}
+
+        {% for section_pair in cv.sections %}
+          {% assign section_title = section_pair[0] %}
+          {% assign section_entries = section_pair[1] %}
+          {% if section_title == 'Experience' or section_title == 'Volunteer' %}{% continue %}{% endif %}
+
+          {% capture section_has_content %}{% include cv/has_content.liquid entries=section_entries %}{% endcapture %}
+          {% assign section_has_content = section_has_content | strip %}
+          {% if section_has_content == 'true' %}
+            <a class="anchor" id="{{ section_title | slugify }}"></a>
+            <div class="card mt-3 p-3">
+              <h3 class="card-title font-weight-medium">{{ section_title }}</h3>
+              {% assign entries = section_entries %}
+              {% if section_title == 'Education' %}
+                {% assign entries = section_entries | al_cv_sort_by_date %}
+                {% include cv/education.liquid %}
+              {% elsif section_title == 'Awards' or section_title == 'Honors and Awards' or section_title == 'Research Grants' %}
+                {% include cv/awards.liquid %}
+              {% elsif section_title == 'Publications' %}
+                {% include cv/publications.liquid %}
+              {% elsif section_title == 'Leadership' %}
+                {% include cv/experience.liquid %}
+              {% elsif section_title == 'Skills' %}
+                {% include cv/skills.liquid %}
+              {% elsif section_title == 'Languages' %}
+                {% include cv/languages.liquid %}
+              {% elsif section_title == 'Interests' or section_title == 'Academic Interests' %}
+                {% include cv/interests.liquid %}
+              {% elsif section_title == 'Certificates' %}
+                {% include cv/certificates.liquid %}
+              {% elsif section_title == 'Projects' or section_title == 'Open Source Projects' %}
+                {% include cv/projects.liquid %}
+              {% elsif section_title == 'References' %}
+                {% include cv/references.liquid %}
+              {% else %}
+                {% include cv/generic.liquid %}
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </article>
+  {% else %}
+    <article><div class="cv"><p>No RenderCV data found in <code>_data/cv.yml</code>.</p></div></article>
+  {% endif %}
+</div>
